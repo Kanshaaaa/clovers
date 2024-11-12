@@ -30,7 +30,11 @@ public class Clovers extends Application {
     public void start(Stage primaryStage) {
         System.out.println("testing");
         // ImageView ghost = new ImageView(getClass().getResource("ghost.png").toExternalForm());
-        ImageView ghost = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/"));
+        Image ghostOg=new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/");
+      //  ImageView ghost = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/"));
+      ImageView ghost=new ImageView(ghostOg);
+        Image ghostRight= new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//character//right.png/");
+        Image ghostUp= new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//character//up.png/");
         ghost.setFitWidth(400);
         ghost.setFitHeight(400);
         ghost.setLayoutX(20);
@@ -61,13 +65,19 @@ public class Clovers extends Application {
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case DOWN:
+                    
                     ghost.setY(ghost.getY() + 10);break;
                 case UP:
                     ghost.setY(ghost.getY() - 10);  break;
                 case LEFT:
+                   
                     ghost.setX(ghost.getX() - 10); break;
                 case RIGHT:
+//                     ghost.setImage(ghostRight);
+//                   ghost.setLayoutX(20);
+//        ghost.setLayoutY(150);
                     ghost.setX(ghost.getX() + 10);  break;
+                    
 
             }
         });
