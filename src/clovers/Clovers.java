@@ -9,6 +9,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import static javafx.scene.input.KeyCode.DOWN;
+import static javafx.scene.input.KeyCode.LEFT;
+import static javafx.scene.input.KeyCode.RIGHT;
+import static javafx.scene.input.KeyCode.UP;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -17,27 +25,54 @@ import javafx.stage.Stage;
  * @author DELL
  */
 public class Clovers extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
-        System.out.println("testing");
-         System.out.println("testing");
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
+        // ImageView ghost = new ImageView(getClass().getResource("ghost.png").toExternalForm());
+        ImageView ghost = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/"));
+        ghost.setFitWidth(400);
+        ghost.setFitHeight(400);
+        ghost.setLayoutX(20);
+        ghost.setLayoutY(150);
+        //""
+        ImageView imageView = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//bg.png/"));
+//       Image bg = new Image(getClass().getResourceAsStream("bg.png"));
+//       ImageView imageView=new ImageView(bg);
+
+        imageView.setFitWidth(1300);
+        imageView.setFitHeight(650);
+        imageView.setX(0);
+        imageView.setY(0);
+       
+        Pane pane = new Pane();
+
+        pane.getChildren().addAll(imageView, ghost);
+
+        Scene scene = new Scene(pane, 300, 250);
+      
+        
+        ghost.setOnKeyPressed(e->{
+    if(e.getCode()==KeyCode.ENTER){
+        System.out.println("enter key is pressed"); 
+    }
+});
+  
+        scene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case DOWN:
+                    ghost.setY(ghost.getY() + 10);break;
+                case UP:
+                    ghost.setY(ghost.getY() - 10);  break;
+                case LEFT:
+                    ghost.setX(ghost.getX() - 10); break;
+                case RIGHT:
+                    ghost.setX(ghost.getX() + 10);  break;
+
             }
         });
         
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
+      
+        primaryStage.setTitle("curses and clovers");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -48,5 +83,5 @@ public class Clovers extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
