@@ -28,6 +28,7 @@ public class Clovers extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        System.out.println("testing");
         // ImageView ghost = new ImageView(getClass().getResource("ghost.png").toExternalForm());
         ImageView ghost = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/"));
         ghost.setFitWidth(400);
