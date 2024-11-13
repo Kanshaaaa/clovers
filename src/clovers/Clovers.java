@@ -39,11 +39,16 @@ public class Clovers extends Application {
         ghost.setFitHeight(400);
         ghost.setLayoutX(20);
         ghost.setLayoutY(150);
+        
+        
+        
+        
         //""
         ImageView imageView = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//bg.png/"));
 //       Image bg = new Image(getClass().getResourceAsStream("bg.png"));
 //       ImageView imageView=new ImageView(bg);
 
+imageView.setStyle("-fx-property:streached");
         imageView.setFitWidth(1300);
         imageView.setFitHeight(650);
         imageView.setX(0);
