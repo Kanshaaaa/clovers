@@ -39,19 +39,20 @@ public class Clovers extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        primaryStage.setMaximized(true);
         System.out.println("testing");
         // ImageView ghost = new ImageView(getClass().getResource("ghost.png").toExternalForm());
-        Image ghostOg = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//left1.png/");
+        Image ghostOg = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//left1.png/");
 
-        Image lifeImg = new Image("file:///C:/Users/DELL/Desktop/SE220/Game/clovers/src/clovers/lives.png");
-        Image menuImg = new Image("file:///C:/Users/DELL/Desktop/SE220/Game/clovers/src/clovers/menu.png");
-        Image timerImg = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//timer.png/");
+        Image lifeImg = new Image("file:///C:/Users/quikm/Desktop/SE220/Game/clovers/src/clovers/lives.png");
+        Image menuImg = new Image("file:///C:/Users/quikm/Desktop/SE220/Game/clovers/src/clovers/menu.png");
+        Image timerImg = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//timer.png/");
         //  ImageView ghost = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/"));
         
-        Image ghostRight = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//right1.png/");
-        Image ghostUp = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//up1.png/");
-        Image ghostDown = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//down2.png/");
-        ImageView imageView = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//bg.png/"));
+        Image ghostRight = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//right1.png/");
+        Image ghostUp = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//up1.png/");
+        Image ghostDown = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//down2.png/");
+        ImageView imageView = new ImageView(new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//bg.png/"));
 
 //       Image bg = new Image(getClass().getResourceAsStream("bg.png"));
 //       ImageView imageView=new ImageView(bg);
@@ -115,21 +116,31 @@ ImageView ghost = new ImageView(ghostOg);
             switch (e.getCode()) {
                 case DOWN:
                     ghost.setImage(ghostDown);
-                    ghost.setY(ghost.getY() + 10);
+                    if (!(ghost.getY() + 10 > imageView.getY() + imageView.getFitHeight() - ghost.getFitHeight())) {
+                        ghost.setY(ghost.getY() + 10);
+                    }
                     break;
                 case UP:
                     ghost.setImage(ghostUp);
-                    ghost.setY(ghost.getY() - 10);
+                    if (!(ghost.getY() - 10 < imageView.getY())) {
+                        
+                        ghost.setY(ghost.getY() - 10);
+                    }
                     break;
 
                 case LEFT:
                     ghost.setImage(ghostOg);
-                    ghost.setX(ghost.getX() - 10);
+                    if (!(ghost.getX() - 10 < imageView.getX())) {
+                        
+                        ghost.setX(ghost.getX() - 10);
+                    }
                     break;
                 case RIGHT:
                     ghost.setImage(ghostRight);
-//                  
-                    ghost.setX(ghost.getX() + 10);
+                    if (!(ghost.getX() + 10 > imageView.getX() + imageView.getFitWidth() - ghost.getFitWidth())) {
+                        
+                        ghost.setX(ghost.getX() + 10);
+                    }
                     break;
 
             }
@@ -154,7 +165,7 @@ ImageView ghost = new ImageView(ghostOg);
         double ghostY = ghost.getY();
 
         // Check if the ghost is near the right edge
-        if (ghostX > screenWidth * 0.7 && background.getX() > screenWidth - bgWidth) {
+        if (ghostX > screenWidth * 0.7 && background.getX()  - 290 > screenWidth - bgWidth) {// 290 being the width of the weird white part
             background.setX(background.getX() - ghostStep);
             ghost.setX(ghostX - ghostStep); // Move ghost with background
         }
