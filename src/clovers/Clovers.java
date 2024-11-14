@@ -29,28 +29,48 @@ import javafx.stage.Stage;
  * @author DELL
  */
 public class Clovers extends Application {
-private double screenWidth = 1000; // Width of visible area
-    private double screenHeight = 600; // Height of visible area
+
+    private double screenWidth = 1000; // Width of visible area
+    private double screenHeight = 800; // Height of visible area
     private double bgWidth = 1746;     // Width of kitchen background
     private double bgHeight = 1166;    // Height of kitchen background
     private double ghostStep = 10;     // Step size for ghost movement
-    private double offsetY = 80;  
+//    private double offsetY = 80;
+
     @Override
     public void start(Stage primaryStage) {
         System.out.println("testing");
         // ImageView ghost = new ImageView(getClass().getResource("ghost.png").toExternalForm());
-        Image ghostOg = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/");
+        Image ghostOg = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//left1.png/");
+
         Image lifeImg = new Image("file:///C:/Users/DELL/Desktop/SE220/Game/clovers/src/clovers/lives.png");
         Image menuImg = new Image("file:///C:/Users/DELL/Desktop/SE220/Game/clovers/src/clovers/menu.png");
         Image timerImg = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//timer.png/");
-        ImageView menuView = new ImageView(menuImg);
+        //  ImageView ghost = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/"));
+        
+        Image ghostRight = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//right1.png/");
+        Image ghostUp = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//up1.png/");
+        Image ghostDown = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//down2.png/");
+        ImageView imageView = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//bg.png/"));
+
+//       Image bg = new Image(getClass().getResourceAsStream("bg.png"));
+//       ImageView imageView=new ImageView(bg);
+ImageView ghost = new ImageView(ghostOg);
+        ImageView menu = new ImageView(menuImg);
         ImageView life = new ImageView(lifeImg);
         ImageView life2 = new ImageView(lifeImg);
         ImageView life3 = new ImageView(lifeImg);
         ImageView timer = new ImageView(timerImg);
-        
-        Rectangle rectangle=new Rectangle(0,0,1746,80);
-        rectangle.setFill(Color.ANTIQUEWHITE);
+
+        imageView.setFitWidth(1746);
+        imageView.setFitHeight(1166);
+        imageView.setX(0);
+        imageView.setY(0);
+
+        ghost.setFitWidth(400);
+        ghost.setFitHeight(400);
+        ghost.setLayoutX(20);
+//        ghost.setY(offsetY + 150);
 
         life.setFitWidth(80);
         life.setFitHeight(80);
@@ -58,51 +78,32 @@ private double screenWidth = 1000; // Width of visible area
         life2.setFitHeight(80);
         life3.setFitWidth(80);
         life3.setFitHeight(80);
-        
-        timer.setFitWidth(120);
-        timer.setFitHeight(80);
-        menuView.setFitWidth(70);
-        menuView.setFitHeight(70);
+
+        timer.setFitWidth(180);
+        timer.setFitHeight(70);
+        menu.setFitWidth(70);
+        menu.setFitHeight(70);
 
         life.setX(100);
         life2.setX(200);
         life3.setX(300);
-      
-        menuView.setY(10);
-        timer.setX(600);
 
-        Pane topBar = new Pane(rectangle,menuView, life, life2, life3,timer);
+        menu.setY(10);
+        timer.setX(570);
+        timer.setY(0);
 
-        //  ImageView ghost = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/"));
-        ImageView ghost = new ImageView(ghostOg);
-        Image ghostRight = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//right.png/");
-        Image ghostUp = new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//up.png/");
-        ghost.setFitWidth(400);
-        ghost.setFitHeight(400);
-        ghost.setLayoutX(20);
-        ghost.setY(offsetY + 150);
-        
-
-//        GridPane lives=new GridPane();
-//        lives.addRow(0, lifeview,lifeview,lifeview);
-        //""
-        ImageView imageView = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//bg.png/"));
-        
-//       Image bg = new Image(getClass().getResourceAsStream("bg.png"));
-//       ImageView imageView=new ImageView(bg);
-
-        imageView.setStyle("-fx-property:streached");
-        imageView.setFitWidth(1746 );
-       imageView.setFitHeight(1166 );
-        imageView.setX(0);
-        imageView.setY(0);
-
+        Rectangle rectangle = new Rectangle(0, 0, 1500, 800);
+        Pane topBar = new Pane(menu, life, life2, life3, timer);
         Pane pane = new Pane();
+        pane.getChildren().addAll(imageView, ghost, topBar);
+        StackPane stack = new StackPane();
 
-           pane.getChildren().addAll(imageView, ghost,topBar);
-      //  pane.getChildren().addAll(imageView, ghost);
+        stack.getChildren().addAll(pane, topBar);
+        stack.setClip(rectangle);
+        stack.setLayoutX(0);
 
-        Scene scene = new Scene(pane, 1746, 1166);
+        //  pane.getChildren().addAll(imageView, ghost);
+        Scene scene = new Scene(stack, 1746, 1166);
 
         ghost.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER) {
@@ -113,7 +114,7 @@ private double screenWidth = 1000; // Width of visible area
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case DOWN:
-//                    ghost.setImage(ghostOg);
+                    ghost.setImage(ghostDown);
                     ghost.setY(ghost.getY() + 10);
                     break;
                 case UP:
@@ -132,27 +133,28 @@ private double screenWidth = 1000; // Width of visible area
                     break;
 
             }
-             scrollBackground(imageView, ghost);
-             
+            scrollBackground(imageView, ghost);
+
         });
-        
+
 //        if(ghost.getX()==260){
 //            imageView.setY(400);
 //        }
-
-        ghost.setOnMousePressed(e->{
+        ghost.setOnMousePressed(e -> {
             System.out.println(ghost.getY());
         });
         primaryStage.setTitle("curses and clovers");
         primaryStage.setScene(scene);
         primaryStage.show();
-          ghost.requestFocus();
+        ghost.requestFocus();
     }
-private void scrollBackground(ImageView background, ImageView ghost) {
+
+    private void scrollBackground(ImageView background, ImageView ghost) {
         double ghostX = ghost.getX();
         double ghostY = ghost.getY();
 
-          if (ghostX > screenWidth * 0.7 && background.getX() > screenWidth - bgWidth) {
+        // Check if the ghost is near the right edge
+        if (ghostX > screenWidth * 0.7 && background.getX() > screenWidth - bgWidth) {
             background.setX(background.getX() - ghostStep);
             ghost.setX(ghostX - ghostStep); // Move ghost with background
         }
@@ -161,22 +163,22 @@ private void scrollBackground(ImageView background, ImageView ghost) {
             background.setX(background.getX() + ghostStep);
             ghost.setX(ghostX + ghostStep);
         }
-        // Check if the ghost is near the bottom edge (adjusted for offsetY)
-        if (ghostY > (screenHeight - offsetY) * 0.7 + offsetY && background.getY() > screenHeight - bgHeight) {
+        // Check if the ghost is near the bottom edge
+        if (ghostY > screenHeight * 0.3 && background.getY() > screenHeight - bgHeight) {
             background.setY(background.getY() - ghostStep);
-            ghost.setY(ghostY - ghostStep); // Keep ghost fully visible when moving down
+            ghost.setY(ghostY - ghostStep);
         }
-
-        // Top edge (adjusted for offsetY)
-        if (ghostY < (screenHeight - offsetY) * 0.3 + offsetY && background.getY() < offsetY) {
+        // Check if the ghost is near the top edge
+        if (ghostY < screenHeight * 0.3 && background.getY() < 0) {
             background.setY(background.getY() + ghostStep);
-            ghost.setY(ghostY + ghostStep); // Keep ghost fully visible when moving up
+            ghost.setY(ghostY + ghostStep);
         }
-
-        // Optional: Prevent the background from moving too far beyond its boundaries (use conditions to set max/min values for Y)
-        background.setY(Math.max(Math.min(background.getY(), offsetY), screenHeight - bgHeight));
-   
+        
+        if(ghostX==1746){
+           background.setX(1746);
+        }
     }
+
     /**
      * @param args the command line arguments
      */
