@@ -41,21 +41,28 @@ public class Clovers extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setMaximized(true);
         System.out.println("testing");
-        // ImageView ghost = new ImageView(getClass().getResource("ghost.png").toExternalForm());
-        Image ghostOg = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//left1.png/");
-
-        Image lifeImg = new Image("file:///C:/Users/quikm/Desktop/SE220/Game/clovers/src/clovers/lives.png");
-        Image menuImg = new Image("file:///C:/Users/quikm/Desktop/SE220/Game/clovers/src/clovers/menu.png");
-        Image timerImg = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//timer.png/");
-        //  ImageView ghost = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/"));
+//jumans 
+//        Image ghostOg = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//left1.png/");
+//        Image lifeImg = new Image("file:///C:/Users/quikm/Desktop/SE220/Game/clovers/src/clovers/lives.png");
+//        Image menuImg = new Image("file:///C:/Users/quikm/Desktop/SE220/Game/clovers/src/clovers/menu.png");
+//        Image timerImg = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//timer.png/");
+//        //  ImageView ghost = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/"));
+//        Image ghostRight = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//right1.png/");
+//        Image ghostUp = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//up1.png/");
+//        Image ghostDown = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//down2.png/");
+//        ImageView imageView = new ImageView(new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//bg.png/"));
         
-        Image ghostRight = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//right1.png/");
-        Image ghostUp = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//up1.png/");
-        Image ghostDown = new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//down2.png/");
-        ImageView imageView = new ImageView(new Image("file:///C://Users//quikm//Desktop//SE220//Game//clovers//src//clovers//bg.png/"));
+        //kanzahs 
+         Image ghostOg = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//left1.png/");
+        Image lifeImg = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers/lives.png/");
+        Image menuImg = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//menu.png/");
+        Image timerImg = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//timer.png/");
+        //  ImageView ghost = new ImageView(new Image("file:///C://Users//DELL//Desktop//SE220//Game//clovers//src//clovers//ghost.png/"));
+        Image ghostRight = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//right1.png/");
+        Image ghostUp = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//up1.png/");
+        Image ghostDown = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//down2.png/");
+        ImageView imageView = new ImageView(new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//bg.png/"));
 
-//       Image bg = new Image(getClass().getResourceAsStream("bg.png"));
-//       ImageView imageView=new ImageView(bg);
 ImageView ghost = new ImageView(ghostOg);
         ImageView menu = new ImageView(menuImg);
         ImageView life = new ImageView(lifeImg);
