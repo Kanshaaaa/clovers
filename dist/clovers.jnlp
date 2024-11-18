@@ -8,11 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="clovers.jar" size="241606" download="eager" />
+    <jar href="clovers.jar" size="463541" download="eager" />
   </resources>
-  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="clovers" >
-    <param name="requiredFXVersion" value="8.0+"/>
-  </applet-desc>
   <jfx:javafx-desc  width="800" height="600" main-class="clovers.Clovers"  name="clovers" />
   <update check="always"/>
 </jnlp>
