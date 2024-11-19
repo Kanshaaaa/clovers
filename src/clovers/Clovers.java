@@ -182,12 +182,13 @@ public class Clovers extends Application {
         safe.setY(50);
 
         safeInput.setLayoutX(687);
-        safeInput.setLayoutY(194);
+        safeInput.setLayoutY(192);
 
         safeInput.setPrefWidth(119);
         safeInput.setPrefHeight(32);
 
-        safeInput.setStyle("-fx-background-color:transparent;");
+        safeInput.setFont(bFont);
+        safeInput.setStyle("-fx-background-color:#7393B3;-fx-text-fill: white;");
 
         Rectangle dialogue = new Rectangle(250, 470, 800, 160);
         dialogue.setFill(Color.BLACK);
@@ -247,14 +248,27 @@ public class Clovers extends Application {
         timerAnim.getKeyFrames().add(timerFrame);
         timerAnim.setCycleCount(Timeline.INDEFINITE);
         timerAnim.play();
-
+        
+Rectangle safeTest=new Rectangle(196,94);
+ safeTest.setLayoutX(310);
+safeTest.setLayoutY(517);
+        safeTest.setFill(Color.TRANSPARENT);
+        safeTest.setStroke(Color.RED);
+        Rectangle fridge = new Rectangle(838,120,214,484); 
+    
+        fridge.setFill(Color.TRANSPARENT);
+        fridge.setStroke(Color.RED);
+        
+        
         Pane topBar = new Pane(menu, life, life2, life3, timer, timerText);
+       
+    fridge.setLayoutX(838);
+        fridge.setLayoutY(120);
         Pane pane = new Pane();
 
+        //fridge.layoutXProperty().bind(observable);
         pane.getChildren().addAll(imageView, ghost, topBar);
-      
-                               
-        
+
         StackPane stack = new StackPane();
         Pane pane2 = new Pane();
 
@@ -264,6 +278,8 @@ public class Clovers extends Application {
         pane2.getChildren().addAll(prev, polaroid, next);
         stack.getChildren().addAll(pane, topBar);
 
+        
+        
         // stack.setClip(rectangle);
         // stack.setLayoutX(0);
         //  pane.getChildren().addAll(imageView, ghost);
@@ -272,6 +288,7 @@ public class Clovers extends Application {
         scene.setOnMousePressed(e -> {
 
             System.out.println("X: " + e.getX() + "Y: " + e.getY());
+            System.out.println("ghostX: " + ghost.getLayoutX() + "ghostY: " + ghost.getLayoutY());
         });
 
         b1.setOnAction(e2 -> {
@@ -305,6 +322,37 @@ public class Clovers extends Application {
             safeInput.setText(safeInput.getText() + "0       ");
         });
         GridPane dial = new GridPane();
+
+        dial.addRow(0, b1, b2, b3);
+        dial.addRow(1, b4, b5, b6);
+        // dial.addRow(2, b7, b8, b9);
+        // dial.add(b0, 1, 3);
+
+        dial.setLayoutX(695);
+        dial.setLayoutY(235);
+
+        b0.setLayoutX(738);
+        b0.setLayoutY(359);
+        b7.setLayoutX(696);
+        b7.setLayoutY(322);
+        b8.setLayoutX(738);
+        b8.setLayoutY(322);
+        b9.setLayoutX(780);
+        b9.setLayoutY(322);
+
+        b1.setFont(bFont);
+        b2.setFont(bFont);
+        b3.setFont(bFont);
+        b4.setFont(bFont);
+        b5.setFont(bFont);
+        b6.setFont(bFont);
+        b7.setFont(bFont);
+        b8.setFont(bFont);
+        b9.setFont(bFont);
+        b0.setFont(bFont);
+
+        dial.setHgap(20);
+        dial.setVgap(20);
         scene.setOnKeyPressed(e -> {
 
             switch (e.getCode()) {
@@ -343,64 +391,44 @@ public class Clovers extends Application {
 //                     
 //
 //                    //fridge interaction
-                    if (ghost.getX() >= 430.0 && ghost.getX() <= 680.0 && ghost.getY() <= 250.0 && ghost.getY() >= 0.0) {
+                    if (ghost.getX() + 20 >= 530.0 && ghost.getX() + 20 <= 820.0 && ghost.getY()  <= 523.0 && ghost.getY() >= 120.0) {
+                        //if (ghost.getBoundsInParent().intersects(fridge.getBoundsInParent())) {
                         System.out.println("near fridge");
                         polaroid.setImage(img.get(currentImg));
 
                         stack.getChildren().addAll(pane2);
+                        
+                        stack.getChildren().remove(safeInput);
 
                     }
 //cabinet interaction
-                    if (ghost.getX() >= 50 && ghost.getX() <= 280 && ghost.getY() <= 250 && ghost.getY() >= 230) {
-                        
-                        if (imageView.getImage() != bg && imageView.getImage() == bgCabinet) {//cabinet open
-                             if (safe.getImage() == safeOpen) {//if the safe is open
+                   // if (ghost.getX()+20 >= 50 && ghost.getX()+20 <= 280 && ghost.getY() <= 250 && ghost.getY() >= 230) {
+if (ghost.getBoundsInParent().intersects(safeTest.getBoundsInParent())) {
+//&& imageView.getImage() != bg &&  used to be in this if statmenet down
+                        if (imageView.getImage() == bgCabinet) {//cabinet open
+                            if (safe.getImage() == book) {//remove the pane, end of safe interaction
+                                stack.getChildren().remove(pane3);
+                                safe.setImage(safeWrong);//setting default in case user wants to open it again
+                            }
+                            if (safe.getImage() == safeOpen) {//if the safe is open
                                 safe.setImage(book);
-                                safe.setY(40);
-                                 safe.setX(500);
+                                safe.setY(30);
+                                safe.setX(450);
                                 safe.setFitHeight(410);
                                 safe.setFitWidth(410);
                                 //stack.getChildren().remove(pane3);
+
+                            } else {// if the safe is closed
+                                safe.setImage(safeImg);//show safe
+
+                                pane3.getChildren().addAll(dial, dialogue, b0, b7, b8, b9);
+                                stack.getChildren().add(pane3);
                             }
-                             else{// if the safe is closed
-                            safe.setImage(safeImg);
+//                            if (safe.getImage() == book) {//remove the pane, end of safe interaction
+//                                stack.getChildren().remove(pane3);
+//                            }
 
-                            dial.addRow(0, b1, b2, b3);
-                            dial.addRow(1, b4, b5, b6);
-                            // dial.addRow(2, b7, b8, b9);
-                            // dial.add(b0, 1, 3);
-
-                            dial.setLayoutX(695);
-                            dial.setLayoutY(235);
-
-                            b0.setLayoutX(738);
-                            b0.setLayoutY(359);
-                            b7.setLayoutX(696);
-                            b7.setLayoutY(322);
-                            b8.setLayoutX(738);
-                            b8.setLayoutY(322);
-                            b9.setLayoutX(780);
-                            b9.setLayoutY(322);
-
-                            b1.setFont(bFont);
-                            b2.setFont(bFont);
-                            b3.setFont(bFont);
-                            b4.setFont(bFont);
-                            b5.setFont(bFont);
-                            b6.setFont(bFont);
-                            b7.setFont(bFont);
-                            b8.setFont(bFont);
-                            b9.setFont(bFont);
-                            b0.setFont(bFont);
-
-                            dial.setHgap(20);
-                            dial.setVgap(20);
-                            pane3.getChildren().addAll(dial, dialogue, b0, b7, b8, b9);
-                            stack.getChildren().add(pane3);
-                             }
-                           
-                        } 
-                        else {
+                        } else if (imageView.getImage() == bg) {
                             imageView.setImage(bgCabinet);
                         }
 
@@ -414,26 +442,29 @@ public class Clovers extends Application {
                     }
 
                     if (stack.getChildren().contains(pane3)) {
-                        stack.getChildren().remove(pane3);
+                        stack.getChildren().removeAll(pane3, safeInput);
                     }
 
                 case ENTER:
+//                    
+
                     if (safeInput.getText().equals("1       9       5       8       ")) {
 
                         // safeInput.setStyle("-fx-border-color:green;-fx-border-width:2");
-                        safeInput.setBorder(new Border(new BorderStroke(
-                                Color.GREEN, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3)
-                        )));
+//                       
+                        safe.setY(35);
                         safe.setImage(safeOpen);
+
                         pane3.getChildren().removeAll(dial, b0, b7, b8, b9, safeInput);
-                    } else {
-                        //   safeInput.setStyle("-fx-border-color:red;-fx-border-width:2");
-                        safeInput.setBorder(new Border(new BorderStroke(
-                                Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3)
-                        )));
+                    } else {//wrong input
+                        safeInput.setStyle("-fx-border-color:#ff6961;-fx-border-width:2;-fx-background-color:#7393B3;-fx-text-fill: white;-fx-padding:0;");
+                        // safeInput.setStyle("-fx-background-color:grey;-fx-text-fill: green;");
+                        safeInput.setText("");
+//                      
+                          stack.getChildren().add(pane3);
+
                         safe.setImage(safeWrong);
                     }
-
                     break;
 
             }
@@ -471,14 +502,6 @@ public class Clovers extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         ghost.requestFocus();
-    }
-
-    public void checkInput() {
-        while (safeInput.getText().equals("1985") == false) {
-            safe.setImage(safeWrong);
-        }
-        safe.setImage(safeOpen);
-
     }
 
     private void scrollBackground(ImageView background, ImageView ghost) {
@@ -519,4 +542,3 @@ public class Clovers extends Application {
     }
 
 }
-//for the cabinet add a loop for invalid answer,fix the x y options for open safe, fix x y positions for te actual book
