@@ -94,6 +94,8 @@ public class Clovers extends Application {
 
         Font font = Font.loadFont("file:///C:/Users/DELL/Desktop/Game/clovers/resources/Pixellari.ttf/", 40);
         Font bFont = Font.loadFont("file:///C:/Users/DELL/Desktop/Game/clovers/resources/Pixellari.ttf/", 12);
+        
+        
         Button b1 = new Button("1");
         Button b2 = new Button("2");
         Button b3 = new Button("3");
@@ -189,6 +191,38 @@ public class Clovers extends Application {
 
         safeInput.setFont(bFont);
         safeInput.setStyle("-fx-background-color:#7393B3;-fx-text-fill: white;");
+        GridPane dial = new GridPane();
+
+        dial.addRow(0, b1, b2, b3);
+        dial.addRow(1, b4, b5, b6);
+        // dial.addRow(2, b7, b8, b9);
+        // dial.add(b0, 1, 3);
+
+        dial.setLayoutX(695);
+        dial.setLayoutY(235);
+
+        b0.setLayoutX(738);
+        b0.setLayoutY(359);
+        b7.setLayoutX(696);
+        b7.setLayoutY(322);
+        b8.setLayoutX(738);
+        b8.setLayoutY(322);
+        b9.setLayoutX(780);
+        b9.setLayoutY(322);
+
+        b1.setFont(bFont);
+        b2.setFont(bFont);
+        b3.setFont(bFont);
+        b4.setFont(bFont);
+        b5.setFont(bFont);
+        b6.setFont(bFont);
+        b7.setFont(bFont);
+        b8.setFont(bFont);
+        b9.setFont(bFont);
+        b0.setFont(bFont);
+
+        dial.setHgap(20);
+        dial.setVgap(20);
 
         Rectangle dialogue = new Rectangle(250, 470, 800, 160);
         dialogue.setFill(Color.BLACK);
@@ -248,21 +282,20 @@ public class Clovers extends Application {
         timerAnim.getKeyFrames().add(timerFrame);
         timerAnim.setCycleCount(Timeline.INDEFINITE);
         timerAnim.play();
-        
-Rectangle safeTest=new Rectangle(196,94);
- safeTest.setLayoutX(310);
-safeTest.setLayoutY(517);
+
+        Rectangle safeTest = new Rectangle(196, 94);
+        safeTest.setLayoutX(310);
+        safeTest.setLayoutY(517);
         safeTest.setFill(Color.TRANSPARENT);
         safeTest.setStroke(Color.RED);
-        Rectangle fridge = new Rectangle(838,120,214,484); 
-    
+        Rectangle fridge = new Rectangle(838, 120, 214, 484);
+
         fridge.setFill(Color.TRANSPARENT);
         fridge.setStroke(Color.RED);
-        
-        
+
         Pane topBar = new Pane(menu, life, life2, life3, timer, timerText);
-       
-    fridge.setLayoutX(838);
+
+        fridge.setLayoutX(838);
         fridge.setLayoutY(120);
         Pane pane = new Pane();
 
@@ -273,13 +306,12 @@ safeTest.setLayoutY(517);
         Pane pane2 = new Pane();
 
         Pane pane3 = new Pane();
-        pane3.getChildren().addAll(safe, safeInput);
+       // Pane pane4=new Pane(safe);
+        pane3.getChildren().addAll(safe, dialogue, dial, b0, b7, b8, b9, safeInput);
 
         pane2.getChildren().addAll(prev, polaroid, next);
         stack.getChildren().addAll(pane, topBar);
 
-        
-        
         // stack.setClip(rectangle);
         // stack.setLayoutX(0);
         //  pane.getChildren().addAll(imageView, ghost);
@@ -321,38 +353,7 @@ safeTest.setLayoutY(517);
         b0.setOnAction(e2 -> {
             safeInput.setText(safeInput.getText() + "0       ");
         });
-        GridPane dial = new GridPane();
 
-        dial.addRow(0, b1, b2, b3);
-        dial.addRow(1, b4, b5, b6);
-        // dial.addRow(2, b7, b8, b9);
-        // dial.add(b0, 1, 3);
-
-        dial.setLayoutX(695);
-        dial.setLayoutY(235);
-
-        b0.setLayoutX(738);
-        b0.setLayoutY(359);
-        b7.setLayoutX(696);
-        b7.setLayoutY(322);
-        b8.setLayoutX(738);
-        b8.setLayoutY(322);
-        b9.setLayoutX(780);
-        b9.setLayoutY(322);
-
-        b1.setFont(bFont);
-        b2.setFont(bFont);
-        b3.setFont(bFont);
-        b4.setFont(bFont);
-        b5.setFont(bFont);
-        b6.setFont(bFont);
-        b7.setFont(bFont);
-        b8.setFont(bFont);
-        b9.setFont(bFont);
-        b0.setFont(bFont);
-
-        dial.setHgap(20);
-        dial.setVgap(20);
         scene.setOnKeyPressed(e -> {
 
             switch (e.getCode()) {
@@ -386,64 +387,78 @@ safeTest.setLayoutY(517);
                     break;
 
                 case Z:
-                    System.out.println("z key is pressed");
+    System.out.println("Z key is pressed");
+     System.out.println("z key is pressed");
                     //all interactions with a z
+
 //                     
 //
 //                    //fridge interaction
-                    if (ghost.getX() + 20 >= 530.0 && ghost.getX() + 20 <= 820.0 && ghost.getY()  <= 523.0 && ghost.getY() >= 120.0) {
+                    if (ghost.getX() + 20 >= 530.0 && ghost.getX() + 20 <= 820.0 && ghost.getY() <= 523.0 && ghost.getY() >= 120.0) {
                         //if (ghost.getBoundsInParent().intersects(fridge.getBoundsInParent())) {
                         System.out.println("near fridge");
                         polaroid.setImage(img.get(currentImg));
+                        //  stack.getChildren().remove(safeInput);
 
                         stack.getChildren().addAll(pane2);
-                        
-                        stack.getChildren().remove(safeInput);
 
                     }
-//cabinet interaction
-                   // if (ghost.getX()+20 >= 50 && ghost.getX()+20 <= 280 && ghost.getY() <= 250 && ghost.getY() >= 230) {
-if (ghost.getBoundsInParent().intersects(safeTest.getBoundsInParent())) {
-//&& imageView.getImage() != bg &&  used to be in this if statmenet down
-                        if (imageView.getImage() == bgCabinet) {//cabinet open
-                            if (safe.getImage() == book) {//remove the pane, end of safe interaction
-                                stack.getChildren().remove(pane3);
-                                safe.setImage(safeWrong);//setting default in case user wants to open it again
-                            }
-                            if (safe.getImage() == safeOpen) {//if the safe is open
-                                safe.setImage(book);
-                                safe.setY(30);
-                                safe.setX(450);
-                                safe.setFitHeight(410);
-                                safe.setFitWidth(410);
-                                //stack.getChildren().remove(pane3);
+    // Safe interaction
+    if (ghost.getX() + 20 >= 50 && ghost.getX() + 20 <= 280 && ghost.getY() <= 250 && ghost.getY() >= 230) {
+        if (imageView.getImage() == bgCabinet) {
+            if (safe.getImage() == book) {
+                // Exit book view (end interaction)
+                stack.getChildren().removeAll(pane3);
+            } else if (safe.getImage() == safeOpen) {
+                // Transition to the book view
+                safe.setImage(book);
+                safe.setY(30);
+                safe.setX(450);
+                safe.setFitHeight(410);
+                safe.setFitWidth(410);
+            } else {
+                // Show safe UI with dials if not already showing book or safeOpen
+                safe.setImage(safeImg);
+                safe.setFitWidth(510);
+                safe.setFitHeight(510);
+                safe.setX(400);
+                safe.setY(50);
 
-                            } else {// if the safe is closed
-                                safe.setImage(safeImg);//show safe
+                // Ensure all UI components are visible and added to the pane
+                safeInput.setVisible(true);
+                b0.setVisible(true);
+                b7.setVisible(true);
+                b8.setVisible(true);
+                b9.setVisible(true);
+                dial.setVisible(true);
+                if (!pane3.getChildren().contains(dial)) {
+                    pane3.getChildren().addAll(dial, b0, b7, b8, b9, safeInput);
+                }
+                stack.getChildren().add(pane3);
+            }
+        } else if (imageView.getImage() == bg) {
+            // Change to cabinet background
+            imageView.setImage(bgCabinet);
+        }
+    }
+    break;
 
-                                pane3.getChildren().addAll(dial, dialogue, b0, b7, b8, b9);
-                                stack.getChildren().add(pane3);
-                            }
-//                            if (safe.getImage() == book) {//remove the pane, end of safe interaction
-//                                stack.getChildren().remove(pane3);
-//                            }
-
-                        } else if (imageView.getImage() == bg) {
-                            imageView.setImage(bgCabinet);
-                        }
-
-                    }
-
-                    break;
 
                 case X:
+                    if (stack.getChildren().contains(pane3)) {
+                        // Instead of removing the components entirely, just hide them
+                        safeInput.setVisible(false);
+                        b0.setVisible(false);
+                        b7.setVisible(false);
+                        b8.setVisible(false);
+                        b9.setVisible(false);
+                        dial.setVisible(false);
+                        stack.getChildren().remove(pane3);
+                    }
                     if (stack.getChildren().contains(pane2)) {
                         stack.getChildren().remove(pane2);
                     }
-
-                    if (stack.getChildren().contains(pane3)) {
-                        stack.getChildren().removeAll(pane3, safeInput);
-                    }
+                    break;
 
                 case ENTER:
 //                    
@@ -461,7 +476,7 @@ if (ghost.getBoundsInParent().intersects(safeTest.getBoundsInParent())) {
                         // safeInput.setStyle("-fx-background-color:grey;-fx-text-fill: green;");
                         safeInput.setText("");
 //                      
-                          stack.getChildren().add(pane3);
+                        stack.getChildren().add(pane3);
 
                         safe.setImage(safeWrong);
                     }
