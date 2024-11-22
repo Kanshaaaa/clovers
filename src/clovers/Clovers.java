@@ -16,6 +16,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -37,6 +38,7 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -71,9 +73,9 @@ public class Clovers extends Application {
     Image book = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//recipe_book.png/");
     Media button = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//button.mp3/");
     MediaPlayer buttonPlayer = new MediaPlayer(button);
-
     TextField safeInput = new TextField();
     ImageView safe = new ImageView(safeImg);
+     Scanner scan;
 
 //    private double offsetY = 80;
     @Override
@@ -113,7 +115,8 @@ public class Clovers extends Application {
         MediaPlayer entryPlayer = new MediaPlayer(entry);
         MediaView entryView = new MediaView(entryPlayer);
 
-        Media firstSecond = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//firstSecond.mp3/");
+        Media firstSecond = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//rain.mp4/");
+
         MediaPlayer firstSecondPlayer = new MediaPlayer(firstSecond);
         MediaView firstSecondView = new MediaView(firstSecondPlayer);
 
@@ -132,28 +135,30 @@ public class Clovers extends Application {
         Media wrong = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//wrong1.mp3/");
         MediaPlayer wrongPlayer = new MediaPlayer(wrong);
         MediaView wrongPlayerView = new MediaView(wrongPlayer);
-        
-        Media cabinetOpen = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//cabinetOpen.mp3/");
+
+        Media cabinetOpen = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//cabinetOpen.mp4/");
         MediaPlayer cabinetOpenPlayer = new MediaPlayer(cabinetOpen);
-       
-           Media safeReach = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//safeReach.mp3/");
+
+        Media safeReach = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//safeReach.mp3/");
         MediaPlayer safeReachPlayer = new MediaPlayer(safeReach);
-        
-        
-        Media bookGrab= new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//bookGrab.mp3/");
-         MediaPlayer bookGrabPlayer = new MediaPlayer(bookGrab);
-        
+
+        Media bookGrab = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//bookGrab.mp3/");
+        MediaPlayer bookGrabPlayer = new MediaPlayer(bookGrab);
+
         rainPlayer.setCycleCount(rainPlayer.INDEFINITE);
         // rainPlayer.stop();
         rainPlayer.play();
 
         firstSecondPlayer.setCycleCount(firstSecondPlayer.INDEFINITE);
         // firstSecondPlayer.setVolume(10);
-         firstSecondPlayer.play();
+        firstSecondPlayer.play();
         firstSecondPlayer.stop();
 
         Font font = Font.loadFont("file:///C:/Users/DELL/Desktop/Game/clovers/resources/Pixellari.ttf/", 40);
-        Font bFont = Font.loadFont("file:///C:/Users/DELL/Desktop/Game/clovers/resources/Pixellari.ttf/", 12);
+        Font bFont = Font.loadFont("file:///C:/Users/DELL/Desktop/Game/clovers/resources/Pixellari.ttf/", 12);//button fonts
+        Font dialogueFont=Font.loadFont("file:///C:/Users/DELL/Desktop/Game/clovers/resources/Pixellari.ttf/", 20);
+      
+                
 //        File scanner = new File("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//me.txt/");
 //        FileInputStream input = new FileInputStream(scanner);
 //        int value;
@@ -296,6 +301,59 @@ public class Clovers extends Application {
         dialogue.setFill(Color.BLACK);
         dialogue.setStroke(Color.WHITE);
         dialogue.setStrokeWidth(5);
+        
+        HBox hb = new HBox();
+        hb.setLayoutX(275);
+        hb.setLayoutY(500);
+        hb.setSpacing(30);
+        
+        Rectangle charImg = new Rectangle(100, 100);
+        charImg.setFill(Color.ANTIQUEWHITE);
+        charImg.setX(266);
+        charImg.setLayoutY(500);
+        
+          Label skip=new Label("skip");
+          skip.setFont(dialogueFont);
+        skip.setStyle("-fx-text-fill:white;");
+        skip.setLayoutX(1000);
+        skip.setLayoutY(600);
+        
+        
+        Label speaker = new Label("testing");
+        speaker.setLayoutX(276);
+        speaker.setLayoutY(500);
+        speaker.setFont(dialogueFont);
+      
+        speaker.setStyle("-fx-text-fill:white;");
+        
+        Rectangle nameTag=new Rectangle(295,455,100,30);
+        speaker.setLayoutX(276);
+        speaker.setLayoutY(500);
+        
+        Label name=new Label("Genvieve");
+         name.setStyle("-fx-text-fill:white;");
+        name.setFont(dialogueFont);
+        name.setLayoutX(300);
+        
+         name.setLayoutY(457);
+         nameTag.setFill(Color.BLACK);
+        nameTag.setStroke(Color.WHITE);
+        nameTag.setStrokeWidth(2);
+        
+        Group dialogueBox=new Group(dialogue,nameTag,name);
+        
+        hb.getChildren().addAll(charImg,speaker);
+        
+        try {
+            File file = new File("C://Users//DELL//Desktop//Game//clovers//src//clovers//mainScript.txt");
+            scan = new Scanner(file);
+          
+
+        } catch (IOException e) {
+            System.out.println("IOException" + e);
+        }
+
+        
         int[] lives = {3};
         int mtlh = 2; //MinsToLoseHearts
         Timeline timerAnim = new Timeline();
@@ -365,6 +423,8 @@ public class Clovers extends Application {
 
         fridge.setLayoutX(838);
         fridge.setLayoutY(120);
+      
+        
         Pane pane = new Pane();
 
         //fridge.layoutXProperty().bind(observable);
@@ -372,18 +432,22 @@ public class Clovers extends Application {
 
         StackPane stack = new StackPane();
         Pane pane2 = new Pane();
+         pane2.getChildren().addAll(prev, polaroid, next);
 
         Pane pane3 = new Pane();
-        // Pane pane4=new Pane(safe);
-        pane3.getChildren().addAll(safe, dialogue, dial, b0, b7, b8, b9, safeInput);
+        pane3.getChildren().addAll(safe, dial, b0, b7, b8, b9, safeInput);
+        
+        Pane pane4=new Pane();//putting dialogue box in here
+        pane4.getChildren().addAll(dialogueBox,hb,skip);
+        
 
-        pane2.getChildren().addAll(prev, polaroid, next);
-        stack.getChildren().addAll(pane, topBar);
+       
+        stack.getChildren().addAll(pane, topBar,pane4);
         Slider s1 = new Slider(0, 1, 0.1);
         Slider s2 = new Slider(0, 1, 0.1);
 
         Rectangle menuBox = new Rectangle(450, 160, 500, 400);
-          menuBox.setFill(Color.BURLYWOOD);
+        menuBox.setFill(Color.BURLYWOOD);
 
         Label resume = new Label("Resume");
         resume.setLayoutX(500);
@@ -404,13 +468,13 @@ public class Clovers extends Application {
         settingsBtn.setLayoutX(500);
         settingsBtn.setLayoutY(490);
         settingsBtn.setFont(font);
-        
-          Button back2 = new Button("<");
+
+        Button back2 = new Button("<");
         back2.setLayoutX(470);
         back2.setLayoutY(170);
         back2.setFont(bFont);
 
-        Pane gameMenu = new Pane(menuBox,back2, resume, map, manual, settingsBtn);
+        Pane gameMenu = new Pane(menuBox, back2, resume, map, manual, settingsBtn);
         gameMenu.setLayoutX(700);
         gameMenu.setLayoutY(190);
 
@@ -421,8 +485,6 @@ public class Clovers extends Application {
         back.setLayoutX(470);
         back.setLayoutY(170);
         back.setFont(bFont);
-        
-       
 
         s1.setLayoutX(700);
         s1.setLayoutY(190);
@@ -456,7 +518,6 @@ public class Clovers extends Application {
         settings.setLayoutY(470);
         settings.setLayoutX(470);
 
-
         s1.valueProperty().addListener(e -> {
             rainPlayer.setVolume(s1.getValue());
         });
@@ -478,11 +539,11 @@ public class Clovers extends Application {
             buttonNoise();
 
         });
-        
+
         settingsBtn.setOnMousePressed(e -> {
             stack.getChildren().remove(gameMenu);
             stack.getChildren().add(settings);
-             buttonNoise();
+            buttonNoise();
         });
 //        menu
         // stack.setClip(rectangle);
@@ -498,13 +559,13 @@ public class Clovers extends Application {
 
         back.setOnMousePressed(e -> {//back button on the settings menu
             stack.getChildren().remove(settings);
-             stack.getChildren().add(gameMenu);
+            stack.getChildren().add(gameMenu);
             buttonNoise();
         });
-        
+
         back2.setOnMousePressed(e -> {//the back button on the game menu
             stack.getChildren().remove(gameMenu);
-          
+
             buttonNoise();
         });
 
@@ -623,8 +684,8 @@ public class Clovers extends Application {
                         if (imageView.getImage() == bgCabinet) {
                             if (safe.getImage() == book) {
                                 bookGrabPlayer.stop();
-                                 bookGrabPlayer.seek(Duration.ZERO);
-                                 bookGrabPlayer.play();
+                                bookGrabPlayer.seek(Duration.ZERO);
+                                bookGrabPlayer.play();
                                 // Exit book view (end interaction)
                                 stack.getChildren().removeAll(pane3);
                             } else if (safe.getImage() == safeOpen) {
@@ -638,10 +699,9 @@ public class Clovers extends Application {
                             } else {
                                 // Show safe UI with dials if not already showing book or safeOpen
                                 safeReachPlayer.stop();
-                              safeReachPlayer.seek(Duration.ZERO);
+                                safeReachPlayer.seek(Duration.ZERO);
                                 safeReachPlayer.play();
-                                
-        
+
                                 safe.setImage(safeImg);
                                 safe.setFitWidth(510);
                                 safe.setFitHeight(510);
@@ -663,9 +723,9 @@ public class Clovers extends Application {
                         } else if (imageView.getImage() == bg) {
                             // Change to cabinet background
                             imageView.setImage(bgCabinet);
-                             cabinetOpenPlayer.stop();
-                              cabinetOpenPlayer.seek(Duration.ZERO);
-                              cabinetOpenPlayer.play();
+                            cabinetOpenPlayer.stop();
+                            cabinetOpenPlayer.seek(Duration.ZERO);
+                            cabinetOpenPlayer.play();
                         }
                     }
                     break;
@@ -684,7 +744,11 @@ public class Clovers extends Application {
                     if (stack.getChildren().contains(pane2)) {
                         stack.getChildren().remove(pane2);
                     }
+                     if (stack.getChildren().contains(pane4)) {
+                       stack.getChildren().remove(pane4);
+                    }
                     break;
+                   
 
                 case ENTER:
 //                    
@@ -708,11 +772,47 @@ public class Clovers extends Application {
                         safe.setImage(safeWrong);
                     }
                     break;
+                case SPACE:
+                     if (scan != null && scan.hasNextLine()) {
+                String line = scan.nextLine();
+                if (line.equals("-----")==false) {
+                  
+                    speaker.setText(line);
+                    
+                }
+                else{
+                   // label.setText("dashedLineReached");
+                     line = scan.nextLine();
+                    speaker.setText(line);
+                    stack.getChildren().remove(pane4);
+                   
+                }
+
+            } else {
+                speaker.setText("End of file reached!");
+                  stack.getChildren().remove(pane4);
+                  closeScanner();
+                //label.setDisable(true); // Disable button when no more lines
+            }
+                    break;
 
             }
             scrollBackground(imageView, ghost);
 
         });
+        skip.setOnMousePressed(e4->{
+   while (scan != null && scan.hasNextLine()) {
+                String line = scan.nextLine();
+                if (line.equals("-----")) {
+                    line = scan.nextLine();
+                    speaker.setText(line);
+                    stack.getChildren().remove(pane4);
+                    break; 
+                }
+                stack.getChildren().remove(pane4);
+            }
+            closeScanner();
+});
         next.setOnAction(e -> {
 
             try {
@@ -721,6 +821,7 @@ public class Clovers extends Application {
                     System.out.println("next clicked");
                     polaroid.setImage(img.get(currentImg + 1));
                     currentImg++;
+                    buttonNoise();
                 }
 
             } catch (ArrayIndexOutOfBoundsException e2) {
@@ -733,6 +834,7 @@ public class Clovers extends Application {
                 System.out.println("prev clicked");
                 polaroid.setImage(img.get(currentImg - 1));
                 currentImg--;
+                buttonNoise();
 
             } catch (ArrayIndexOutOfBoundsException e2) {
                 System.out.println("no more images" + e2.getMessage());
@@ -781,7 +883,12 @@ public class Clovers extends Application {
         buttonPlayer.seek(javafx.util.Duration.ZERO);
         buttonPlayer.play();
     }
-
+private void closeScanner() {
+        if (scan != null) {
+            scan.close();
+            scan = null; // Set to null to avoid closing it multiple times
+        }
+}
     /**
      * @param args the command line arguments
      */
