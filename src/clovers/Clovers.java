@@ -4,7 +4,13 @@
  */
 package clovers;
 
+import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -13,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,6 +39,10 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import static javafx.scene.paint.Color.color;
 import javafx.scene.shape.Rectangle;
@@ -58,13 +69,15 @@ public class Clovers extends Application {
     Image safeOpen = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//safe_open.png/");
     Image safeWrong = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//safe_wrong.png/");
     Image book = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//recipe_book.png/");
+    Media button = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//button.mp3/");
+    MediaPlayer buttonPlayer = new MediaPlayer(button);
 
     TextField safeInput = new TextField();
     ImageView safe = new ImageView(safeImg);
 
 //    private double offsetY = 80;
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws FileNotFoundException, IOException {
         primaryStage.setMaximized(true);
         System.out.println("testing");
 //jumans 
@@ -92,10 +105,63 @@ public class Clovers extends Application {
         Image pic3 = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//polaroid_three.png/");
         Image pic4 = new Image("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//polaroid_four.png/");
 
+        Media rain = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//rain.mp4/");
+        MediaPlayer rainPlayer = new MediaPlayer(rain);
+        MediaView rainView = new MediaView(rainPlayer);
+
+        Media entry = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//entry.mp3/");
+        MediaPlayer entryPlayer = new MediaPlayer(entry);
+        MediaView entryView = new MediaView(entryPlayer);
+
+        Media firstSecond = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//firstSecond.mp3/");
+        MediaPlayer firstSecondPlayer = new MediaPlayer(firstSecond);
+        MediaView firstSecondView = new MediaView(firstSecondPlayer);
+
+        Media third = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//third.mp3/");
+        MediaPlayer thirdPlayer = new MediaPlayer(third);
+        MediaView thirdView = new MediaView(thirdPlayer);
+
+        Media safeBeep = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//safePress.mp3/");
+        MediaPlayer safeBeepPlayer = new MediaPlayer(safeBeep);
+        MediaView safeBeepView = new MediaView(safeBeepPlayer);
+
+        Media correct = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//correct.mp3/");
+        MediaPlayer correctPlayer = new MediaPlayer(correct);
+        MediaView correctView = new MediaView(correctPlayer);
+
+        Media wrong = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//wrong1.mp3/");
+        MediaPlayer wrongPlayer = new MediaPlayer(wrong);
+        MediaView wrongPlayerView = new MediaView(wrongPlayer);
+        
+        Media cabinetOpen = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//cabinetOpen.mp3/");
+        MediaPlayer cabinetOpenPlayer = new MediaPlayer(cabinetOpen);
+       
+           Media safeReach = new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//safeReach.mp3/");
+        MediaPlayer safeReachPlayer = new MediaPlayer(safeReach);
+        
+        
+        Media bookGrab= new Media("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//bookGrab.mp3/");
+         MediaPlayer bookGrabPlayer = new MediaPlayer(bookGrab);
+        
+        rainPlayer.setCycleCount(rainPlayer.INDEFINITE);
+        // rainPlayer.stop();
+        rainPlayer.play();
+
+        firstSecondPlayer.setCycleCount(firstSecondPlayer.INDEFINITE);
+        // firstSecondPlayer.setVolume(10);
+         firstSecondPlayer.play();
+        firstSecondPlayer.stop();
+
         Font font = Font.loadFont("file:///C:/Users/DELL/Desktop/Game/clovers/resources/Pixellari.ttf/", 40);
         Font bFont = Font.loadFont("file:///C:/Users/DELL/Desktop/Game/clovers/resources/Pixellari.ttf/", 12);
-        
-        
+//        File scanner = new File("file:///C://Users//DELL//Desktop//Game//clovers//src//clovers//me.txt/");
+//        FileInputStream input = new FileInputStream(scanner);
+//        int value;
+//        while ((value = input.read()) != -1) {
+//            System.out.print((char) value);
+//        }
+//        input.close();
+
         Button b1 = new Button("1");
         Button b2 = new Button("2");
         Button b3 = new Button("3");
@@ -123,6 +189,7 @@ public class Clovers extends Application {
         ImageView imageView = new ImageView(bg);
         ImageView ghost = new ImageView(ghostOg);
         ImageView menu = new ImageView(menuImg);
+
         ImageView life = new ImageView(lifeImg);
         ImageView life2 = new ImageView(lifeImg);
         ImageView life3 = new ImageView(lifeImg);
@@ -148,8 +215,8 @@ public class Clovers extends Application {
 
         timer.setFitWidth(180);
         timer.setFitHeight(70);
-        menu.setFitWidth(70);
-        menu.setFitHeight(70);
+        menu.setFitWidth(50);
+        menu.setFitHeight(50);
 
         life.setX(100);
         life2.setX(200);
@@ -191,6 +258,7 @@ public class Clovers extends Application {
 
         safeInput.setFont(bFont);
         safeInput.setStyle("-fx-background-color:#7393B3;-fx-text-fill: white;");
+
         GridPane dial = new GridPane();
 
         dial.addRow(0, b1, b2, b3);
@@ -306,12 +374,117 @@ public class Clovers extends Application {
         Pane pane2 = new Pane();
 
         Pane pane3 = new Pane();
-       // Pane pane4=new Pane(safe);
+        // Pane pane4=new Pane(safe);
         pane3.getChildren().addAll(safe, dialogue, dial, b0, b7, b8, b9, safeInput);
 
         pane2.getChildren().addAll(prev, polaroid, next);
         stack.getChildren().addAll(pane, topBar);
+        Slider s1 = new Slider(0, 1, 0.1);
+        Slider s2 = new Slider(0, 1, 0.1);
 
+        Rectangle menuBox = new Rectangle(450, 160, 500, 400);
+          menuBox.setFill(Color.BURLYWOOD);
+
+        Label resume = new Label("Resume");
+        resume.setLayoutX(500);
+        resume.setLayoutY(190);
+        resume.setFont(font);
+
+        Label map = new Label("Level map");
+        map.setLayoutX(500);
+        map.setLayoutY(290);
+        map.setFont(font);
+
+        Label manual = new Label("Game Manual");
+        manual.setLayoutX(500);
+        manual.setLayoutY(390);
+        manual.setFont(font);
+
+        Label settingsBtn = new Label("Settings");
+        settingsBtn.setLayoutX(500);
+        settingsBtn.setLayoutY(490);
+        settingsBtn.setFont(font);
+        
+          Button back2 = new Button("<");
+        back2.setLayoutX(470);
+        back2.setLayoutY(170);
+        back2.setFont(bFont);
+
+        Pane gameMenu = new Pane(menuBox,back2, resume, map, manual, settingsBtn);
+        gameMenu.setLayoutX(700);
+        gameMenu.setLayoutY(190);
+
+        Label amb = new Label("Ambience");
+        Label music = new Label("Music");
+        Label credits = new Label("Credits");
+        Button back = new Button("<");
+        back.setLayoutX(470);
+        back.setLayoutY(170);
+        back.setFont(bFont);
+        
+       
+
+        s1.setLayoutX(700);
+        s1.setLayoutY(190);
+        s2.setLayoutX(700);
+        s2.setLayoutY(290);
+        amb.setLayoutX(500);
+        music.setLayoutX(500);
+        credits.setLayoutX(500);
+        amb.setLayoutY(180);
+        music.setLayoutY(280);
+        credits.setLayoutY(380);
+
+        s1.setMajorTickUnit(0.1);
+        s1.setValue(0.1);
+//        s1.setShowTickMarks(true);
+//        s1.setShowTickLabels(true);
+
+        s2.setMajorTickUnit(0.1);
+        s2.setValue(0.1);
+//        s2.setShowTickLabels(true);
+//        s2.setShowTickMarks(true);
+
+        amb.setFont(font);
+        music.setFont(font);
+        credits.setFont(font);
+        Rectangle settingsBox = new Rectangle(450, 160, 500, 300);
+
+        settingsBox.setFill(Color.BURLYWOOD);
+
+        Pane settings = new Pane(settingsBox, back, amb, s1, music, s2, credits);
+        settings.setLayoutY(470);
+        settings.setLayoutX(470);
+
+
+        s1.valueProperty().addListener(e -> {
+            rainPlayer.setVolume(s1.getValue());
+        });
+
+        s2.valueProperty().addListener(e -> {
+            firstSecondPlayer.setVolume(s2.getValue());
+            firstSecondPlayer.play();
+//            if (firstSecondPlayer.isMute() == false) {
+//                firstSecondPlayer.setVolume(s1.getValue());
+//            } else {
+//                thirdPlayer.setVolume(s2.getValue());
+//            }
+
+        });
+
+        // stack.getChildren().add(settings);
+        menu.setOnMousePressed(e -> {
+            stack.getChildren().add(gameMenu);
+            buttonNoise();
+
+        });
+        
+        settingsBtn.setOnMousePressed(e -> {
+            stack.getChildren().remove(gameMenu);
+            stack.getChildren().add(settings);
+             buttonNoise();
+        });
+//        menu
         // stack.setClip(rectangle);
         // stack.setLayoutX(0);
         //  pane.getChildren().addAll(imageView, ghost);
@@ -323,35 +496,77 @@ public class Clovers extends Application {
             System.out.println("ghostX: " + ghost.getLayoutX() + "ghostY: " + ghost.getLayoutY());
         });
 
+        back.setOnMousePressed(e -> {//back button on the settings menu
+            stack.getChildren().remove(settings);
+             stack.getChildren().add(gameMenu);
+            buttonNoise();
+        });
+        
+        back2.setOnMousePressed(e -> {//the back button on the game menu
+            stack.getChildren().remove(gameMenu);
+          
+            buttonNoise();
+        });
+
         b1.setOnAction(e2 -> {
             safeInput.setText(safeInput.getText() + "1       ");
+            safeBeepPlayer.stop();
+            safeBeepPlayer.seek(javafx.util.Duration.ZERO);
+            safeBeepPlayer.play();
         });
         b2.setOnAction(e2 -> {
             safeInput.setText(safeInput.getText() + "2       ");
+            safeBeepPlayer.stop();
+            safeBeepPlayer.seek(javafx.util.Duration.ZERO);
+            safeBeepPlayer.play();
         });
         b3.setOnAction(e2 -> {
             safeInput.setText(safeInput.getText() + "3       ");
+            safeBeepPlayer.stop();
+            safeBeepPlayer.seek(javafx.util.Duration.ZERO);
+            safeBeepPlayer.play();
         });
         b4.setOnAction(e2 -> {
             safeInput.setText(safeInput.getText() + "4       ");
+            safeBeepPlayer.stop();
+            safeBeepPlayer.seek(javafx.util.Duration.ZERO);
+            safeBeepPlayer.play();
         });
         b5.setOnAction(e2 -> {
             safeInput.setText(safeInput.getText() + "5       ");
+            safeBeepPlayer.stop();
+            safeBeepPlayer.seek(javafx.util.Duration.ZERO);
+            safeBeepPlayer.play();
         });
         b6.setOnAction(e2 -> {
             safeInput.setText(safeInput.getText() + "6       ");
+            safeBeepPlayer.stop();
+            safeBeepPlayer.seek(javafx.util.Duration.ZERO);
+            safeBeepPlayer.play();
         });
         b7.setOnAction(e2 -> {
             safeInput.setText(safeInput.getText() + "7       ");
+            safeBeepPlayer.stop();
+            safeBeepPlayer.seek(javafx.util.Duration.ZERO);
+            safeBeepPlayer.play();
         });
         b8.setOnAction(e2 -> {
             safeInput.setText(safeInput.getText() + "8       ");
+            safeBeepPlayer.stop();
+            safeBeepPlayer.seek(javafx.util.Duration.ZERO);
+            safeBeepPlayer.play();
         });
         b9.setOnAction(e2 -> {
             safeInput.setText(safeInput.getText() + "9       ");
+            safeBeepPlayer.stop();
+            safeBeepPlayer.seek(javafx.util.Duration.ZERO);
+            safeBeepPlayer.play();
         });
         b0.setOnAction(e2 -> {
             safeInput.setText(safeInput.getText() + "0       ");
+            safeBeepPlayer.stop();
+            safeBeepPlayer.seek(javafx.util.Duration.ZERO);
+            safeBeepPlayer.play();
         });
 
         scene.setOnKeyPressed(e -> {
@@ -387,8 +602,8 @@ public class Clovers extends Application {
                     break;
 
                 case Z:
-    System.out.println("Z key is pressed");
-     System.out.println("z key is pressed");
+                    System.out.println("Z key is pressed");
+                    System.out.println("z key is pressed");
                     //all interactions with a z
 
 //                     
@@ -403,46 +618,57 @@ public class Clovers extends Application {
                         stack.getChildren().addAll(pane2);
 
                     }
-    // Safe interaction
-    if (ghost.getX() + 20 >= 50 && ghost.getX() + 20 <= 280 && ghost.getY() <= 250 && ghost.getY() >= 230) {
-        if (imageView.getImage() == bgCabinet) {
-            if (safe.getImage() == book) {
-                // Exit book view (end interaction)
-                stack.getChildren().removeAll(pane3);
-            } else if (safe.getImage() == safeOpen) {
-                // Transition to the book view
-                safe.setImage(book);
-                safe.setY(30);
-                safe.setX(450);
-                safe.setFitHeight(410);
-                safe.setFitWidth(410);
-            } else {
-                // Show safe UI with dials if not already showing book or safeOpen
-                safe.setImage(safeImg);
-                safe.setFitWidth(510);
-                safe.setFitHeight(510);
-                safe.setX(400);
-                safe.setY(50);
+                    // Safe interaction
+                    if (ghost.getX() + 20 >= 50 && ghost.getX() + 20 <= 280 && ghost.getY() <= 250 && ghost.getY() >= 230) {
+                        if (imageView.getImage() == bgCabinet) {
+                            if (safe.getImage() == book) {
+                                bookGrabPlayer.stop();
+                                 bookGrabPlayer.seek(Duration.ZERO);
+                                 bookGrabPlayer.play();
+                                // Exit book view (end interaction)
+                                stack.getChildren().removeAll(pane3);
+                            } else if (safe.getImage() == safeOpen) {
+                                bookGrabPlayer.play();
+                                // Transition to the book view
+                                safe.setImage(book);
+                                safe.setY(30);
+                                safe.setX(450);
+                                safe.setFitHeight(410);
+                                safe.setFitWidth(410);
+                            } else {
+                                // Show safe UI with dials if not already showing book or safeOpen
+                                safeReachPlayer.stop();
+                              safeReachPlayer.seek(Duration.ZERO);
+                                safeReachPlayer.play();
+                                
+        
+                                safe.setImage(safeImg);
+                                safe.setFitWidth(510);
+                                safe.setFitHeight(510);
+                                safe.setX(400);
+                                safe.setY(50);
 
-                // Ensure all UI components are visible and added to the pane
-                safeInput.setVisible(true);
-                b0.setVisible(true);
-                b7.setVisible(true);
-                b8.setVisible(true);
-                b9.setVisible(true);
-                dial.setVisible(true);
-                if (!pane3.getChildren().contains(dial)) {
-                    pane3.getChildren().addAll(dial, b0, b7, b8, b9, safeInput);
-                }
-                stack.getChildren().add(pane3);
-            }
-        } else if (imageView.getImage() == bg) {
-            // Change to cabinet background
-            imageView.setImage(bgCabinet);
-        }
-    }
-    break;
-
+                                // Ensure all UI components are visible and added to the pane
+                                safeInput.setVisible(true);
+                                b0.setVisible(true);
+                                b7.setVisible(true);
+                                b8.setVisible(true);
+                                b9.setVisible(true);
+                                dial.setVisible(true);
+                                if (!pane3.getChildren().contains(dial)) {
+                                    pane3.getChildren().addAll(dial, b0, b7, b8, b9, safeInput);
+                                }
+                                stack.getChildren().add(pane3);
+                            }
+                        } else if (imageView.getImage() == bg) {
+                            // Change to cabinet background
+                            imageView.setImage(bgCabinet);
+                             cabinetOpenPlayer.stop();
+                              cabinetOpenPlayer.seek(Duration.ZERO);
+                              cabinetOpenPlayer.play();
+                        }
+                    }
+                    break;
 
                 case X:
                     if (stack.getChildren().contains(pane3)) {
@@ -466,12 +692,13 @@ public class Clovers extends Application {
                     if (safeInput.getText().equals("1       9       5       8       ")) {
 
                         // safeInput.setStyle("-fx-border-color:green;-fx-border-width:2");
-//                       
+                        correctPlayer.play();
                         safe.setY(35);
                         safe.setImage(safeOpen);
 
                         pane3.getChildren().removeAll(dial, b0, b7, b8, b9, safeInput);
                     } else {//wrong input
+                        wrongPlayer.play();
                         safeInput.setStyle("-fx-border-color:#ff6961;-fx-border-width:2;-fx-background-color:#7393B3;-fx-text-fill: white;-fx-padding:0;");
                         // safeInput.setStyle("-fx-background-color:grey;-fx-text-fill: green;");
                         safeInput.setText("");
@@ -547,6 +774,12 @@ public class Clovers extends Application {
         if (ghostX == 1746) {
             background.setX(1746);
         }
+    }
+
+    private void buttonNoise() {
+        buttonPlayer.stop();
+        buttonPlayer.seek(javafx.util.Duration.ZERO);
+        buttonPlayer.play();
     }
 
     /**
